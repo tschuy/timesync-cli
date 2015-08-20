@@ -31,19 +31,11 @@ if __name__ == '__main__':
         # Date Worked
         d = datetime.datetime.now()
         # Month worked - optional
-        month_worked = input('Month worked (format: 01): ')
+        month_worked = input('Month worked (format: 01): ') or d.month
         # Day worked - optional
-        day_worked = input('Day worked (format: 31): ')
+        day_worked = input('Day worked (format: 31): ') or d.day
         # Year worked - automatically this year
         year_worked = d.year
-
-        # Month worked default is this month
-        if month_worked is "":
-            month_worked = d.month
-
-        # Day worked default is this month
-        if day_worked is "":
-            day_worked = d.day
 
         # Format date
         date_worked = "{}-{}-{}".format(year_worked, month_worked, day_worked)
