@@ -36,8 +36,6 @@ if __name__ == '__main__':
 
         date_worked = "{}-{}-{}".format(year_worked, month_worked, day_worked)
 
-        # can't choose a custom note, sorry
-        # pull requests welcome
         note = input('Note: ')
 
         url = "{}/v1/times".format(config['server'])
