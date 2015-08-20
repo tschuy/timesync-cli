@@ -28,16 +28,17 @@ if __name__ == '__main__':
         day_worked = input('Day worked (format: 31): ')
         year_worked = d.year
 
-        if month_worked is None:
+        if month_worked is "":
             month_worked = d.month
 
-        if day_worked is None:
+        if day_worked is "":
             day_worked = d.day
 
         date_worked = "{}-{}-{}".format(year_worked, month_worked, day_worked)
 
         # can't choose a custom note, sorry
         # pull requests welcome
+        note = input('Note: ')
 
         url = "{}/v1/times".format(config['server'])
         values = {
@@ -51,7 +52,8 @@ if __name__ == '__main__':
                 'project': project,
                 'activities': activities,
                 'issue_uri': issue_uri,
-                'date_worked': date_worked
+                'date_worked': date_worked,
+                'notes': note
             }
         }
 
