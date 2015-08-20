@@ -56,11 +56,13 @@ if __name__ == '__main__':
                 'user': config['username'],
                 'project': project,
                 'activities': activities,
-                'issue_uri': issue_uri,
                 'date_worked': date_worked,
                 'notes': note
             }
         }
+
+        if issue_uri:
+            values['object']['issue_uri'] = issue_uri
 
         data = json.dumps(values)
         data = str.encode(data)
