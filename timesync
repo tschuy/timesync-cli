@@ -20,7 +20,7 @@ if __name__ == '__main__':
         while(input('More activities? [y/n] ') == 'y'):
             activities.append(input('Activity: '))
 
-        duration = int(input('Time worked in minutes: '))
+        duration = int(input('Time worked in seconds: '))
         issue_uri = input('Issue uri: ') or None
         d = datetime.datetime.now()
         date_worked = "{}-{}-{}".format(d.year, d.month, d.day)
