@@ -22,10 +22,21 @@ if __name__ == '__main__':
 
         duration = int(input('Time worked in seconds: '))
         issue_uri = input('Issue uri: ') or None
-        d = datetime.datetime.now()
-        date_worked = "{}-{}-{}".format(d.year, d.month, d.day)
 
-        # can't choose a custom date or note, sorry
+        d = datetime.datetime.now()
+        month_worked = input('Month worked (format: 01): ')
+        day_worked = input('Day worked (format: 31): ')
+        year_worked = d.year
+
+        if month_worked is None:
+            month_worked = d.month
+
+        if day_worked is None:
+            day_worked = d.day
+
+        date_worked = "{}-{}-{}".format(year_worked, month_worked, day_worked)
+
+        # can't choose a custom note, sorry
         # pull requests welcome
 
         url = "{}/v1/times".format(config['server'])
