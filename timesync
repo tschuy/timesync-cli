@@ -12,33 +12,48 @@ import urllib.request
 if __name__ == '__main__':
     home = os.getenv('HOME')
 
+    # Load the configuration file
     with open(os.path.join(home, '.timesync'), 'r') as config:
         config = json.load(config)
 
+        # Project - required
         project = input('Project: ')
+        # Activities - required
         activities = [input('Activity: ')]
+        # More activities if necessary
         while(input('More activities? [y/n] ') == 'y'):
             activities.append(input('Activity: '))
 
+        # Duration in seconds - required
         duration = int(input('Time worked in seconds: '))
         issue_uri = input('Issue uri: ') or None
 
+        # Date Worked
         d = datetime.datetime.now()
+        # Month worked - optional
         month_worked = input('Month worked (format: 01): ')
+        # Day worked - optional
         day_worked = input('Day worked (format: 31): ')
+        # Year worked - automatically this year
         year_worked = d.year
 
+        # Month worked default is this month
         if month_worked is "":
             month_worked = d.month
 
+        # Day worked default is this month
         if day_worked is "":
             day_worked = d.day
 
+        # Format date
         date_worked = "{}-{}-{}".format(year_worked, month_worked, day_worked)
 
+        # Note - optional
         note = input('Note: ')
 
+        # Create url from server setting in config file
         url = "{}/v1/times".format(config['server'])
+        # JSON Object to POST to TimeSync
         values = {
             'auth': {
                 'username': config['username'],
@@ -58,16 +73,20 @@ if __name__ == '__main__':
         data = json.dumps(values)
         data = str.encode(data)
 
+        # POST to TimeSync server
         req = urllib.request.Request(
             url, data, {'Content-Type': 'application/json'})
 
         try:
+            # Success!
             with urllib.request.urlopen(req) as response:
                 print("Time successfully recorded!")
         except urllib.error.HTTPError as e:
+            # TimeSync error
             error_message = e.read()
             print(error_message, file=stderr)
             exit(errno.ENETDOWN)
         except urllib.error.URLError as e:
+            # Cannot reach server
             print("Cannot connect to server!", file=stderr)
             exit(errno.ENETUNREACH)

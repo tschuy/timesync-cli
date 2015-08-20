@@ -24,5 +24,8 @@ Activity: dev
 More activities? [y/n] n
 Time worked in minutes: 120
 Issue uri: https://github.com/osuosl/timesync-node/issues/123
+Month worked: 08
+Day worked: 20
+Note: Audited js style according to AirBnB's JavaScript guide
 Time successfully recorded!
 ```
